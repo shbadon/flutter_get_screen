@@ -20,7 +20,7 @@ void main(List<String> arguments) async {
       }
     }
   }
-  print('\nProgram Finished.');
+  print('\nProgram Finished.\n');
 }
 
 Future<void> createScreen() async {
