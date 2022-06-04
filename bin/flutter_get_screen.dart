@@ -95,7 +95,7 @@ class ${name.pascalCase}Screen extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
           child: Center(
-            child: Text(${name.pascalCase},
+            child: Text('${name.pascalCase}',
             style: Theme.of(context).textTheme.titleLarge),
           ),
         ),
