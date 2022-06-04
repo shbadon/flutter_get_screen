@@ -33,7 +33,7 @@ Future<void> createScreen() async {
       break;
     }
   }
-  _fileName = _fileName.toLowerCase();
+  _fileName = _fileName.replaceAll(' ', '').toLowerCase();
   final package = path.current.split('/').last.split('\\').last;
   final info = await getInfo();
   final screenBody = await getScreenBody(_fileName, package, info);
@@ -93,8 +93,13 @@ class ${name.pascalCase}Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
-    );
+        body: SafeArea(
+          child: Center(
+            child: Text(${name.pascalCase},
+            style: Theme.of(context).textTheme.titleLarge),
+          ),
+        ),
+      );
   }
 }
 
