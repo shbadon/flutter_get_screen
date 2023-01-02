@@ -1,6 +1,5 @@
 import 'dart:io' show Directory, File, stdin, stdout;
 import 'package:path/path.dart' as path;
-import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
 
 void main(List<String> arguments) async {
@@ -35,10 +34,9 @@ Future<void> createScreen() async {
   }
   _fileName = _fileName.replaceAll(' ', '').toLowerCase();
   final package = path.current.split('/').last.split('\\').last;
-  final info = await getInfo();
-  final screenBody = await getScreenBody(_fileName, package, info);
-  final controllerBody = await getControllerBody(_fileName, package, info);
-  final modelBody = await getModelBody(_fileName, package, info);
+  final screenBody = await getScreenBody(_fileName, package,);
+  final controllerBody = await getControllerBody(_fileName, package, );
+  final modelBody = await getModelBody(_fileName, package, );
 
   await createFile(
     _fileName,
@@ -81,10 +79,8 @@ Future<void> createDirectory(String path) async {
   }
 }
 
-Future<String> getScreenBody(String name, String package, String info) async {
+Future<String> getScreenBody(String name, String package,) async {
   return '''
-  $info
-  
 import 'package:$package/$package.dart';
   
 class ${name.pascalCase}Screen extends StatelessWidget {
@@ -107,10 +103,8 @@ class ${name.pascalCase}Screen extends StatelessWidget {
 }
 
 Future<String> getControllerBody(
-    String name, String package, String info) async {
+    String name, String package,  ) async {
   return '''
-  $info 
-  
 // import 'package:$package/$package.dart';
   
 class ${name.pascalCase}ScreenController {
@@ -119,10 +113,8 @@ class ${name.pascalCase}ScreenController {
   ''';
 }
 
-Future<String> getModelBody(String name, String package, String info) async {
+Future<String> getModelBody(String name, String package,  ) async {
   return '''
-  $info 
-  
 // import 'package:$package/$package.dart';
   
 class ${name.pascalCase}ScreenModel {
@@ -131,17 +123,5 @@ class ${name.pascalCase}ScreenModel {
   ''';
 }
 
-Future<String> getInfo() async {
-  final time = DateFormat('MMM dd, yyyy').add_jm().format(DateTime.now());
-  return '''
-  
-/*                                     *\\
-          **File Created By**
-      name:- Shuoib Hossain 
-      time:- $time
-      contract:-shuibe873@gmail.com
-\\*                                     */
-''';
-}
 
 // dart compile exe bin/flutter_get_screen.dart && dart compile aot-snapshot bin/flutter_get_screen.dart
